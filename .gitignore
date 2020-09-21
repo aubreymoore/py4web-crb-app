@@ -1,0 +1,5 @@
+settings_private.py
+cache.json
+databases/*
+__pycache__/*
+

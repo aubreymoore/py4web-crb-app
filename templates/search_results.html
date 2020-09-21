@@ -1,0 +1,28 @@
+[[extend 'layout.html']]
+
+<form action="[[=URL('index')]]">
+    <input type="submit" value="Search again" />
+</form>
+
+<div>
+    <b>Result of search for "[[ =search_string ]]". 
+    Found in [[ =len(results_dict) ]] of [[ =cache_length ]] documents.</b>
+</div>
+
+[[ for key in results_dict: ]]
+    <div>
+    [[ =XML(results_dict[key]['bib']) ]]
+    [[ enclosure_list=results_dict[key].get('enclosure_list') ]]
+    [[ if enclosure_list: ]]
+        [[ for enclosure in enclosure_list: ]]
+            [[ if enclosure: ]]
+                [[ title = enclosure.get('title') ]]
+                [[ href = enclosure.get('href') ]]
+                [[ if title and href: ]]
+                    File:&nbsp;<a href="[[ =XML(href) ]]">[[ =XML(title) ]]</a><br>
+                [[ pass ]]
+            [[ pass ]]
+        [[ pass ]]
+    [[ pass ]]<br/>
+    </div>
+[[ pass ]]
